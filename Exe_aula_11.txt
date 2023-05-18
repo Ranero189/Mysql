@@ -1,0 +1,31 @@
+Alunos: Henrique, Marco, Giancarlo e Miguel.
+
+//1
+select estado, nome_mun, pib from senso2 where populacao >= 200000;
+
+//2
+select regiao, estado, nome_mun from senso2 where populacao >=150000;
+
+//3
+select regiao, estado, nome_mun from senso2 where populacao >=150000 order by estado;
+
+//4
+select nome_mun from senso2 where regiao is null;
+
+//5
+select count(nome_mun) from senso2 where cod_meso_reg = 5204;
+
+//6
+select count(nome_mun) from senso2 where cod_mic_reg = 52012;
+
+//7
+select max(populacao), estado from senso2;
+
+//8
+select min(populacao), estado from senso2;
+
+//9
+select avg(pib) as pib_medio from senso2 where estado = 'São Paulo';
+
+//10
+select min(pib), estado from senso2;

@@ -1,0 +1,100 @@
+Create database UNIP23_joins;
+use unip23_joins;
+
+create table empregados( codigo_empregado int,  nome varchar(50) ) ;
+create table pagamentos( codigo_pagto int, codigo_empregado int, valor decimal(10,2) ) ;
+create table descontos( codigo_desconto int, codigo_empregado int, valor decimal(10,2) );
+
+
+insert into empregados(codigo_empregado,nome) values(1,’***Luis***’); 
+insert into empregados(codigo_empregado,nome) values(2,’***Marina***’); 
+insert into empregados(codigo_empregado,nome) values(3,’***Letícia***’); 
+insert into empregados(codigo_empregado,nome) values(4,’***Gustavo***’); 
+insert into empregados(codigo_empregado,nome) values(5,’***Mateus***’);
+insert into pagamentos(codigo_empregado,valor) values(1,100) ;
+insert into pagamentos(codigo_empregado,valor) values(1,200) ;
+insert into pagamentos(codigo_empregado,valor) values(3,300) ;
+insert into pagamentos(codigo_empregado,valor) values(5,400) ;
+insert into pagamentos(codigo_empregado,valor) values(5,500);
+insert into descontos(codigo_empregado,valor) values(1,50) ;
+insert into descontos(codigo_empregado,valor) values(2,20) ;
+insert into descontos(codigo_empregado,valor) values(5,30);
+
+
+
+
+
+create table carros (marca varchar(100), modelo varchar(100), ano int,  cor varchar(100));
+create table marcas (marca varchar(100), nome varchar(50));
+
+insert into marcas values('VW','Volkswagem’);
+insert into marcas values('Ford','Ford’);
+insert into marcas values('GM','General Motors’);
+insert into marcas values('Fiat','Fiat’);
+insert into marcas values('Renault','Renault’);
+insert into marcas values('MB','Mercedes Bens’);
+
+
+insert into carros values('VW','Fox',2005,'preto');
+insert into carros values('VW','Fox',2008,'preto');
+insert into carros values('Ford','Ecosport',2009,'verde');
+insert into carros values('Ford','KA',2008,'prata');
+insert into carros values('Fiat','Punto',2008,'branco');
+insert into carros values('Fiat','Uno',2007,'preto');
+insert into carros values('Fiat','Stilo',200,'4prata');
+insert into carros values('Fiat','Uno',2005,'prata');
+insert into carros values('Fiat','Stilo',2008,'verde');
+insert into carros values('Fiat','Uno',2009,'branco');
+insert into carros values('Peugeot','207',2010,'prata');
+insert into carros values('Peugeot','207',2010,'prata');
+insert into carros values('Peugeot','207',2007,'azul');
+insert into carros values('Chrysler','300 C',2008,'verde');
+
+select e.nome, p.valor as pagamento from empregados as e inner join pagamentos as p on e.codigo_empregado = p.codigo_empregado;
+
+select e.nome, p.valor as pagamento, d.valor as desconto from empregados as e inner join pagamentos as p on e.codigo_empregado = p.codigo_empregado inner join descontos as d on e.codigo_empregado = d.codigo_empregado;
+
+select e.nome, p.valor as pagamentos from empregados as e left join pagamentos as p on e.codigo_empregado = p.codigo_empregado;
+
+select e.nome, p.valor as pagamento, d.valor as desconto from empregados as e left join pagamentos as p on e.codigo_empregado = p.codigo_empregado left join descontos as d on e.codigo_empregado = d.codigo_empregado;
+
+select e.nome, p.valor as pagamento, d.valor as descontos from empregados as e right join pagamentos right join descontos as d on e.codigo_empregado = d.codigo_empregado;
+
+select e.nome, p.valor from empregados e cross join pagamentos p on e.codigo_empregado = p.codigo_empregado;
+
+Exercícios
+
+1) select e.nome as marca, p.modelo from marcas as e inner join carros as p on e.marca = p.marca;
+
+select e.nome as marca, p.modelo from marcas as e left join carros as p on e.marca = p.marca;
+
+select e.nome as marca, p.modelo from marcas as e right join carros as p on e.marca = p.marca;
+
+select e.nome as marca, p.modelo from marcas as e cross join carros as p on e.marca = p.marca;
+
+
+2) select e.marca, p.modelo as modelos from marcas as e inner join carros as p on e.marca = p.marca;
+
+select e.marca, p.modelo as modelos from marcas as e left join carros as p on e.marca = p.marca;
+
+select e.marca, p.modelo as modelos from marcas as e right join carros as p on e.marca = p.marca;
+
+select e.marca, p.modelo as modelos from marcas as e cross join carros as p on e.marca = p.marca;
+
+
+3) select e.nome, p.modelo as modelos from marcas as e inner join carros as p on e.marca = p.marca;
+
+select e.nome, p.modelo as modelos from marcas as e left join carros as p on e.marca = p.marca;
+
+select e.nome, p.modelo as modelos from marcas as e right join carros as p on e.marca = p.marca;
+
+select e.nome, p.modelo as modelos from marcas as e cross join carros as p on e.marca = p.marca;
+
+
+4) select e.modelo, p.nome as modelos from carros e inner join marcas p on e.marca = p.marca;
+
+select e.modelo, p.nome as modelos from carros e left join marcas p on e.marca = p.marca;
+
+select e.modelo, p.nome as modelos from carros e right join marcas p on e.marca = p.marca;
+
+select e.modelo, p.nome as modelos from carros e cross join marcas p on e.marca = p.marca;

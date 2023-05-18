@@ -1,0 +1,64 @@
+//Alunos: Henrique, Giancarlo, Marco e Miguel.\\
+
+create database pais;
+
+use pais;
+
+create table cidade(cod_cidade varchar(40) not null, nome varchar(40), num_hab int, primary key(cod_cidade));
+
+create table estado(sigla varchar(40) not null, nome varchar(40), primary key(sigla));
+
+create table pais(cod_pais varchar(40) not null, nome varchar(40), idioma varchar(40), capital varchar(40), primary key(cod_pais), foreign key(capital) references cidade(cod_cidade));
+
+alter table pais add nome_presidente varchar(30);
+
+alter table pais add nome_moeda_oficial varchar(30);
+
+alter table pais change nome_presidente nome_pres varchar(30);
+
+
+insert into cidade values ('001', 'São Paulo', 12345678);
+
+insert into cidade values ('002', 'Rio de Janeiro', 6789012);
+
+insert into cidade values ('003', 'Belo Horizonte', 2500000);
+
+insert into cidade values ('004', 'Brasília', 3055149);
+
+insert into cidade values ('005', 'Curitiba', 1948626);
+
+
+insert into estado values ('SP', 'São Paulo');
+
+insert into estado values ('RJ', 'Rio de Janeiro');
+
+insert into estado values ('MG', 'Minas Gerais');
+
+insert into estado values ('DF', 'Distrito Federal');
+
+insert into estado values ('PR', 'Paraná');
+
+
+insert into pais values ('BR', 'Brasil', 'Português', '004', 'Jair Bolsonaro', 'Real');
+
+insert into pais values ('US', 'Estados Unidos', 'Inglês', NULL , 'Joe Biden', 'Dólar Americano');
+
+insert into pais values ('FR', 'França', 'Francês', NULL , 'Emmanuel Macron', 'Euro');
+
+insert into pais values ('JP', 'Japão', 'Japonês', NULL , 'Fumio Kishida', 'Iene');
+
+insert into pais values ('CN', 'China', 'Chinês', NULL , 'Xi Jinping', 'Renminbi');
+
+
+select * from cidade;
+
+select * from estado;
+
+select * from pais;
+
+
+select num_hab from cidade where cod_cidade = '001';
+
+select nome from estado where sigla = 'RJ';
+
+select nome from pais where nome_pres = 'Xi Jinping';

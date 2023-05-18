@@ -1,0 +1,31 @@
+Alunos: Henrique, Marco, Miguel e Giancarlo.
+
+//1
+SELECT MAX(valor_total) AS maior_valor_locacao FROM locacao;
+
+//2
+SELECT AVG(valor_total) AS media_valor_locacao FROM locacao;
+
+//3
+SELECT MIN(valor_total) AS menor_valor_locacao FROM locacao;
+
+//4
+SELECT SUM(valor_total) AS montante_arrecadado FROM locacao;
+
+//5
+SELECT cliente.Nome, cliente.CPF, valor_total FROM cliente JOIN locacao ON cliente.CPF = cod_cli GROUP BY cliente.Nome, cliente.CPF ORDER BY valor_total ASC;
+
+//6
+SELECT c.Nome, c.CPF, MAX(l.valor_total) AS 'Valor Total de Locação' FROM Cliente c JOIN locacao l ON c.CPF = l.cod_cli GROUP BY c.Nome, c.CPF ORDER BY MAX(l.valor_total) DESC LIMIT 1;
+
+//7
+SELECT c.* FROM Cliente c WHERE EXISTS (SELECT 1 FROM locacao l WHERE l.cod_cli = c.CPF) ORDER BY c.Nome;
+
+//8
+SELECT c.Nome, c.CPF, COUNT(l.codigo) AS 'Numero de Locações', AVG(l.valor_total) AS 'Valor Médio' FROM Cliente c LEFT JOIN locacao l ON c.CPF = l.cod_cli GROUP BY c.Nome, c.CPF;
+
+//9
+SELECT c.Nome, c.CPF, COUNT(l.codigo) AS 'Numero de Locações', AVG(l.valor_total) AS 'Valor Médio' FROM Cliente c LEFT JOIN locacao l ON c.CPF = l.cod_cli GROUP BY c.Nome, c.CPF HAVING AVG(l.valor_total) > 20;
+
+//10
+SELECT c.Nome, MAX(l.valor_total) AS 'Valor da Maior Locação' FROM Cliente c JOIN locacao l ON c.CPF = l.cod_cli GROUP BY c.Nome;
